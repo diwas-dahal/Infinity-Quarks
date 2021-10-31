@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from .forms import *
 from django.http import HttpResponse
-from django.core.exceptions import PermissionDenied, BadRequest
 # Create your views here.
+
+
+def RegistrationPage(requests):
+    return render(requests, 'Registration/Register.html')
 
 
 def Subs(requests):
@@ -10,8 +13,8 @@ def Subs(requests):
         instance = SubscriberForm(requests.POST)
         if instance.is_valid():
             instance.save()
-            return HttpResponse(status=201)
+            return HttpResponse(status=201)  # Successfully Saved
         else:
-            return HttpResponse(status=406)
+            return HttpResponse(status=406)  # Invalid request
     else:
-        return HttpResponse(status=405)
+        return HttpResponse(status=405)  # Method not allowed

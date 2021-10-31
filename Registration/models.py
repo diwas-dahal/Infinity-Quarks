@@ -4,10 +4,10 @@ from django.db import models
 
 
 class Subscriber(models.Model):
+    username = models.CharField(max_length=300)
     phoneNumber = models.BigIntegerField()
     email = models.EmailField()
     bio = models.TextField()
-    url = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.email
