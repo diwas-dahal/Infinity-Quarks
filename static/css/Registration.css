@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap");
 
 * {
   box-sizing: border-box;
@@ -10,23 +10,26 @@
 }
 
 body {
-  padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: black;
+  justify-content: center;
+  background-color: hsl(261, 56%, 52%);
   background-attachment: fixed;
   background-size: cover;
   min-height: 100vh;
   min-width: 100vw;
   overflow-x: hidden;
+  background-image: url("http://127.0.0.1:8000/static/images/background.jpg");
+  background-size: cover;
+  background-blend-mode: multiply;
 }
 
 .container {
   min-width: 95%;
   border-radius: 5px;
   margin: 100px;
-
+  position: relative;
   overflow: hidden;
   background-color: rgb(255, 255, 255);
 }
@@ -41,14 +44,14 @@ body {
 }
 
 .register {
-  font-family: 'Rubik', sans-serif; ;
+  font-family: "Rubik", sans-serif;
   font-size: 3rem;
 
   margin-left: 20px;
-  color: #5855f2;
+  color: #673ab7;
 }
 
-.describe{
+.describe {
   padding-top: 20px;
   padding-bottom: 20px;
   margin-left: 20px;
@@ -105,13 +108,24 @@ body {
   border: none;
   margin-left: 30px;
   padding: 10px 30px 10px 30px;
-  border-radius: 25px;
+  border-radius: 10px;
   font-size: 1.01rem;
   font-weight: bolder;
   color: white;
-  background-color: #5855f2;
+  background-color: #673ab7;
   margin-bottom: 15px;
-  transition: 150ms ease-in-out;
+  transition: 50ms ease-in-out;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.ripples {
+  position: absolute;
+  background-color: rgb(223, 219, 219);
+  pointer-events: none;
+  border-radius: 50%;
+  animation: animateripples 500ms linear infinite;
 }
 
 .button:focus {
@@ -122,19 +136,6 @@ body {
   font-family: "Source Code Pro", monospace;
   margin: 0px 0px 10px 20px;
 }
-
-.svg {
-  position: absolute;
-  left: 10px;
-  display: none;
-}
-
-.svg2 {
-  position: absolute;
-  bottom: 10px;
-  display: none;
-}
-
 .warning,
 .warning p {
   color: red;
@@ -155,8 +156,6 @@ body {
   display: initial;
 }
 
-
-
 @media screen and (min-width: 550px) {
   .container {
     max-width: 500px;
@@ -171,10 +170,8 @@ body {
     z-index: -2;
   }
   .button:hover {
-    background-color: white;
-    color: #5855f2;
-    border: 2px solid #5855f2;
-    margin-left: 28px;
+    cursor: pointer;
+    background-color: #7c54c2;
   }
 }
 
@@ -212,7 +209,27 @@ body {
   display: none;
 }
 
+.progress-bar {
+  position: absolute;
+  bottom: 0px;
+  min-width: 30%;
+  min-height: 5px;
+  background-color: #ab86ec;
+  border-radius: 30px 30px 30px 30px;
+  z-index: 100;
+  opacity: 0;
+}
 
+.sub-progress {
+  position: absolute;
+  bottom: 0px;
+  min-width: 100%;
+  min-height: 5px;
+  background-color: #5a24b6;
+  border-radius: 0px 10px 10px 0px;
+  z-index: 1;
+  opacity: 0;
+}
 
 @media only screen and (max-width: 350px) {
   .container {
@@ -221,11 +238,6 @@ body {
 
   .top-section {
     padding: 20px 0px 5px 0px;
-  }
-
-  .register {
-    letter-spacing: initial;
-    font-size: 1.5rem;
   }
 
   .button {
@@ -237,5 +249,42 @@ body {
 
   .serverResponse {
     font-size: 0.7rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .register {
+    letter-spacing: initial;
+    font-size: 2.5rem;
+  }
+
+  .container {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+@keyframes animateripples {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 0.5;
+  }
+  100% {
+    left: -100px;
+    top: -100px;
+    width: 500px;
+    height: 500px;
+    opacity: 0;
+  }
+}
+
+@keyframes progressbar {
+  0% {
+    left: -50%;
+  }
+
+  100% {
+    left: 150%;
   }
 }

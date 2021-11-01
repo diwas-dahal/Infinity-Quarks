@@ -1,6 +1,7 @@
 let submitButton = document.querySelector('.button');
 let ServerResponse = document.querySelector('.serverResponse')
-
+let progressbar = document.querySelector('.progress-bar')
+let subprogressbar = document.querySelector('.sub-progress')
 
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -40,6 +41,9 @@ function sendDataToServer(data, csrftoken) {
                 ServerResponse.style.color = "red";
                 ServerResponse.innerText = "Submission Failed"
             }
+            subprogressbar.style.opacity = '0';
+            progressbar.style.opacity = '0';
+            progressbar.style.animation = '';
     }
     let urlEncodedData = new URLSearchParams(Object.entries(data)).toString()
     xhr.send(urlEncodedData)
@@ -60,7 +64,6 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-
 
 
 
@@ -102,8 +105,10 @@ submitButton.addEventListener("click", (e) => {
     }
 
     const csrftoken = getCookie('csrftoken');
-
     if (valid) {
+        subprogressbar.style.opacity = '1';
+        progressbar.style.opacity = '1';
+        progressbar.style.animation = 'progressbar 0.7s linear infinite';
         sendDataToServer({'username': username.value, 'email': email.value, 'phoneNumber': phone.value, 'bio': text.innerHTML}, csrftoken)
     }
 })
